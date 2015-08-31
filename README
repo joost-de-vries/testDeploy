@@ -1,6 +1,32 @@
-Play - Typescript - Angular
+# Play - Typescript - Angular
 =================================
 
 A port of https://github.com/tastejs/todomvc/tree/master/examples/typescript-angular to Play and sbt.
 
 
+## Heroku
+
+### Configuratie applicatie
+
+#### Github
+For integration with github, zie https://devcenter.heroku.com/articles/github-integration.
+
+#### Buildpack for play/scala with node.
+The current solution uses NodeJS for fast TypeScript compilation. This requires multiple buildpacks.
+See https://devcenter.heroku.com/articles/using-node-js-to-perform-javascript-optimization-for-play-and-scala-applications
+for details.
+
+For NodeJS it is required to have an empty package.json in the root of the project.
+
+The script to be executed to realize it:
+
+...
+NAME=my-special-app
+heroku buildpacks --app $NAME
+heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs.git --app $NAME
+heroku buildpacks:add https://github.com/heroku/heroku-buildpack-scala.git --app $NAME
+heroku buildpacks --app $NAME
+heroku config:set SBT_OPTS="-Dsbt.jse.engineType=Node" --app $NAME
+
+git push
+...
