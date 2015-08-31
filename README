@@ -1,5 +1,4 @@
-# Play - Typescript - Angular
-=================================
+#Play - Typescript - Angular
 
 A port of https://github.com/tastejs/todomvc/tree/master/examples/typescript-angular to Play and sbt.
 
@@ -20,7 +19,7 @@ For NodeJS it is required to have an empty package.json in the root of the proje
 
 The script to be executed to realize it:
 
-...
+```
 NAME=my-special-app
 heroku buildpacks --app $NAME
 heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs.git --app $NAME
@@ -29,4 +28,4 @@ heroku buildpacks --app $NAME
 heroku config:set SBT_OPTS="-Dsbt.jse.engineType=Node" --app $NAME
 
 git push
-...
+```
